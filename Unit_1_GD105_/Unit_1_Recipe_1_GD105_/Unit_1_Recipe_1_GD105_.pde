@@ -38,7 +38,7 @@ void draw() {
   line(182, 374, 308, 374);
 
   // save the image
-  if (frameCount == 1) {
+  if (frameCount == 0) {
     save("output.png");
   }
 }
