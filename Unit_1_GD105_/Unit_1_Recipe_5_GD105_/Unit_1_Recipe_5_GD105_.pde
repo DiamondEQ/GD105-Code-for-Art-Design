@@ -1,75 +1,65 @@
-int numStars = 500; // Number of stars
-Star[] stars = new Star[numStars];
-
+//Album Name "Dark Side of the Moon", Album Atrist:Pink Floyd
 void setup() {
-  size(800, 800);
-
-  // Initialize stars
-  for (int i = 0; i < numStars; i++) {
-    stars[i] = new Star(random(width), random(height));
-  }
-}
-
+  size(400, 400);
+}  
 void draw() {
   background(0);
-
-  // Update and display stars
-  for (int i = 0; i < numStars; i++) {
-    stars[i].update();
-    stars[i].display();
-  }
-
-  // Draw piano keys
-  drawPiano(width / 2, height / 2);
-}
-
-void drawPiano(float x, float y) {
-  float keyWidth = 30;
-  float keyHeight = 200;
-  float blackKeyWidth = 20;
-  float blackKeyHeight = 120;
-  int numKeys = 7; // Number of keys
-
-  // Draw white keys
-  for (int i = 0; i < numKeys; i++) {
-    fill(255);
-    rect(x - (numKeys / 2 - i) * keyWidth, y, keyWidth, keyHeight);
-  }
-
-  // Draw black keys
-  for (int i = 0; i < numKeys - 1; i++) {
-    if (i != 2) { // Skip black key after the third white key
-      fill(0);
-      rect(x - (numKeys / 2 - i - 0.5) * keyWidth, y, blackKeyWidth, blackKeyHeight);
-    }
-  }
-}
-
-class Star {
-  float x, y;
-  float speed;
-
-  Star(float x, float y) {
-    this.x = x;
-    this.y = y;
-    speed = random(1, 3);
-  }
-
-  void update() {
-    y += speed;
-    if (y > height) {
-      y = 0;
-      x = random(width);
-    }
-  }
-
-  void display() {
-    noStroke();
-    fill(255);
-    ellipse(x, y, 2, 2);
-
-    if (frameCount == 0) {
-      save("output.png");
-    }
+  
+  // Draw the prism outline
+  strokeWeight(0);
+  triangle(200,100,300,300,100,300);
+  fill(0);
+  
+  // Draw the prism
+  strokeWeight(0);
+  triangle(200,108,295,297,105,297);
+  fill(255);
+ 
+ //Draw white line that goes into the prism
+  stroke(255);
+  strokeWeight(7);
+  point(0,220);
+  line(0,220,149,200); 
+  //Draw the rainbow spectrum
+  
+  //Red
+  stroke(255,0,0);
+  strokeWeight(7);
+  point(240,175);
+  line(241,175,402,200);
+  
+  //Orange
+  stroke(255,165,0);
+  strokeWeight(7);
+  point(243,181);
+  line(242,180,402,206);
+  
+  //Yellow
+  stroke(255,255,0);
+  strokeWeight(7);
+  point(247,190);
+  line(245,186,402,212);
+  
+  //Green
+  stroke(0,255,0);
+  strokeWeight(7);
+  point(250,196);
+  line(250,193,402,217);
+  
+  //Blue
+  stroke(0,0,255);
+  strokeWeight(7);
+  point(253,200);
+  line(256,199,402,224);
+  
+  //Purple
+  stroke(128,0,128);
+  strokeWeight(7);
+  point(255,206);
+  line(259,207,402,232);
+  
+   // save the image
+  if (frameCount == 1) {
+    save("output.png");
   }
 }
