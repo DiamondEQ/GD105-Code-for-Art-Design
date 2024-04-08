@@ -1,26 +1,26 @@
 void setup() {
-  size(800, 800);
-  background(0); // Set initial background color to black
+  size(800, 600);  // Set the size of the window
+  noCursor();      // Hide the default mouse cursor
 }
 
 void draw() {
-  // Calculate color based on mouse position
-  float r = map(mouseX, 0, width, 0, 255);
-  float g = map(mouseY, 0, height, 0, 255);
-  float b = frameCount % 255; // Use frameCount to generate changing blue color
+  background(255); // Set the background color to white
   
-  // Set stroke color
-  stroke(r, g, b);
+  // Draw the body of the mouse cursor
+  fill(150);
+  ellipse(mouseX, mouseY, 40, 40);
   
-  // Set stroke weight
-  strokeWeight(10);
+  // Draw the ears of the mouse cursor
+  fill(100);
+  ellipse(mouseX - 20, mouseY - 20, 20, 20);
+  ellipse(mouseX + 20, mouseY - 20, 20, 20);
   
-  // Draw a line at the mouse position
-  if (mousePressed) {
-    float previousX = pmouseX; // Previous mouse X position
-    float previousY = pmouseY; // Previous mouse Y position
-    float currentX = mouseX;   // Current mouse X position
-    float currentY = mouseY;   // Current mouse Y position
-    line(previousX, previousY, currentX, currentY); // Draw a line between previous and current mouse position
-  }
+  // Draw the eyes of the mouse cursor
+  fill(0);
+  ellipse(mouseX - 10, mouseY - 5, 5, 5);
+  ellipse(mouseX + 10, mouseY - 5, 5, 5);
+  
+  // Draw the nose of the mouse cursor
+  fill(255, 0, 0);
+  triangle(mouseX, mouseY + 5, mouseX - 5, mouseY + 15, mouseX + 5, mouseY + 15);
 }

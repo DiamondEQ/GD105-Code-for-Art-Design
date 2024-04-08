@@ -5,44 +5,37 @@ void setup(){
 
 void draw(){
   
-  noStroke();
-  //fill(74,194,74);
-  //circle(random(width), random(height), 10);
-  //fill(0);
-  //circle(random(width), random(height), 10);
-  //fill(255);
-  //circle(random(width), random(height), 10);
   
-  stroke(0);
+  stroke(255,255,0);
   strokeWeight(1);
   line(random(width), random(height), 0,0);
-  stroke(255);
+  
+  stroke(255,0,0);
   strokeWeight(1);
   line(random(width), random(height), 350,0);
-  stroke(255);
+  
+  stroke(255, 0, 255);
   strokeWeight(1);
   line(random(width), random(height), 700,0);
-  stroke(0);
+  
+  stroke(255);
   strokeWeight(1);
-  line(random(width), random(height), 700,350);
+  line(random(width), random(height), 350,350);
+  
+  stroke(0,0,255);
   strokeWeight(1);
   line(random(width), random(height), 700,700);
-  stroke(255);
+  
+  stroke(0,255,255);
   strokeWeight(1);
   line(random(width), random(height), 350,700);
-  stroke(255);
+  
+  stroke(0,255,0);
   strokeWeight(1);
   line(random(width), random(height), 0,700);
-  stroke(0);
-  strokeWeight(1);
-  line(random(width), random(height), 0,350);
   
-  //noStroke();
-  //fill(74,194,74);
-  //square(random(width), random(height), 10);
-  //fill(255);
-  //square(random(width), random(height), 10);
-  //fill(0);
-  //square(random(width), random(height), 10);;
+  stroke(255);
+  strokeWeight(1);
+  line(random(width), random(height), 350,350);
   
 }
