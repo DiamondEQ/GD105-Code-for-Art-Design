@@ -1,37 +1,53 @@
 import processing.svg.*;
+
+int cols, rows;
+int scl = 25;
+int w = 1056;
+int h = 816;
+int margin = 48; // Margin size
+
+boolean[][] grid;
+
 void setup() {
-  size(800, 800);
+  size(1056, 816);
+  background(255); // White background
+  noFill();
   smooth();
-  
+  cols = (w - 2 * margin) / scl; // Adjusted cols and rows considering margin
+  rows = (h - 2 * margin) / scl;
+  grid = new boolean[cols][rows];
+  generateMaze();
+  drawMazeMandala();
+
   // Start the SVG file
-  beginRecord(SVG, "geometric_design.svg");
-  
-  // Draw the geometric design
-  drawGeometricDesign();
-  
+  beginRecord(SVG, "MazeMandala.svg");
+
+  // Draw the BasketBall Mandala
+  drawMazeMandala();
+
   // End and save the SVG file
   endRecord();
 }
 
-void drawGeometricDesign() {
-  background(255); // White background
-  
-  // Set stroke weight and color
-  strokeWeight(2);
-  stroke(0); // Black color
-  
-  // Draw the geometric shapes
-  for (int i = 0; i < width; i += 50) {
-    for (int j = 0; j < height; j += 50) {
-      // Draw rectangles
-      rect(i, j, 30, 30);
-      
-      // Draw circles
-      ellipse(i + 15, j + 15, 20, 20);
-      
-      // Draw lines
-      line(i,j , i + 130, j + 130);
-      line(i + 130, j, i, j + 130);
+void generateMaze() {
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      grid[i][j] = random(1) < 0.5;
+    }
+  }
+}
+
+void drawMazeMandala() {
+  stroke(1);
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      float x = margin + i * scl; // Adjusted x and y coordinates considering margin
+      float y = margin + j * scl;
+      if (grid[i][j]) {
+        line(x, y, x + scl, y + scl);
+      } else {
+        line(x + scl, y, x, y + scl);
+      }
     }
   }
 }
