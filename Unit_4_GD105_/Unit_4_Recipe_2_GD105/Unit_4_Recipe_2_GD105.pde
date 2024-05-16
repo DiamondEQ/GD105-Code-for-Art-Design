@@ -65,7 +65,7 @@ void setup() {
 void draw() {
   background(255); 
   
-  image(kobeImage, width/2 - kobeImage.width/2, yOffset - kobeImage.height - 10);
+  image(kobeImage, width/2 - kobeImage.width/2, yOffset - kobeImage.height - 12);
   
   Graph graph = new Graph(teams, seasons, pointsPerGame, reboundsPerGame, assistsPerGame);
   graph.drawGraph();
@@ -80,7 +80,7 @@ void draw() {
   textAlign(CENTER, TOP);
   fill(0);
   textSize(11);
-  text("KOBE BRYANT'S CAREER STATS", width / 2, yOffset / 2 + 30);
+  text("KOBE BRYANT'S CAREER STATS", width / 3, yOffset / 3 + 30);
 }
 
 // Custom hover effect function that checks what bar it is hovered over and displays the data
@@ -167,9 +167,9 @@ class Graph {
       
       textAlign(CENTER, BOTTOM);
       fill(0);
-      text(ppgData[i], x + rectWidth / 6, height - yOffset - hPPG - 5);
-      text(rpgData[i], x + rectWidth / 2, height - yOffset - hRPG - 5);
-      text(apgData[i], x + 5 * rectWidth / 6, height - yOffset - hAPG - 5);
+      text(ppgData[i], x + rectWidth / 6.25, height - yOffset - hPPG - 1);
+      text(rpgData[i], x + rectWidth /2, height - yOffset - hRPG - 1);
+      text(apgData[i], x + 5 * rectWidth / 5.75, height - yOffset - hAPG - 1);
     }
     
     // Season label (rotated)

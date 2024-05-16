@@ -4,7 +4,7 @@ ArrayList<Word> wordBank;
 
 PFont PoppinsSemiBoldItalic; // Declare a font variable
 
-// My array of song lyrics from Kendrick Lamar - Swimming Pools (Drank)
+// My array of song lyrics from first 4 verses after the 1st chorus from Kendrick Lamar - Swimming Pools (Drank)
 String[][] verses = {
   {
     "Now", "I", "done", "grew", "up", "'round", "some", "people", "livin'", "their", "life", "in", "bottles,",
@@ -86,7 +86,7 @@ void setup() {
 
 // Draw function - background and custom font added with text
 void draw() {
-  background(0);
+  background(0,15,15);
 
   textFont(PoppinsSemiBoldItalic); // Set the custom font
   textSize(30); // Setting text size
@@ -183,7 +183,7 @@ class TextObject {
 
     // Displaying text inside the rectangle
     textAlign(CENTER, BOTTOM); // Aligning text
-    textSize(16); // Setting text size
+    textSize(15); // Setting text size
     fill(255); // Setting fill color to white
     text(text, x + w / 2, y - 5); // Displaying regular text
   }
@@ -209,7 +209,7 @@ class Word {
   void display() {
     textFont(PoppinsSemiBoldItalic);
     textAlign(CENTER, CENTER);
-    textSize(16);
+    textSize(14);
     if (placedCorrectly) {
       fill(0, 255, 0); // If placed correctly, change color to green
     } else {
