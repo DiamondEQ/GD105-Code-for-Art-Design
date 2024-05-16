@@ -39,14 +39,29 @@ void generateMaze() {
 
 void drawMazeMandala() {
   stroke(1);
+  // Draw lines first
   for (int i = 0; i < cols; i++) {
     for (int j = 0; j < rows; j++) {
       float x = margin + i * scl; // Adjusted x and y coordinates considering margin
       float y = margin + j * scl;
       if (grid[i][j]) {
+        // Draw a line
         line(x, y, x + scl, y + scl);
-      } else {
-        line(x + scl, y, x, y + scl);
+      }
+    }
+  }
+  // Draw squares after drawing lines
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      float x = margin + i * scl; // Adjusted x and y coordinates considering margin
+      float y = margin + j * scl;
+      if (!grid[i][j]) {
+        // Draw a random square
+        float choice = random(1);
+        if (choice < 0.33) {
+          // Draw a square
+          rect(x, y, scl, scl);
+        }
       }
     }
   }
