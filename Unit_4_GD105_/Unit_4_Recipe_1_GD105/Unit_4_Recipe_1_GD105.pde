@@ -86,7 +86,7 @@ void setup() {
 
 // Draw function - background and custom font added with text
 void draw() {
-  background(0,15,15);
+  background(0, 15, 15);
 
   textFont(PoppinsSemiBoldItalic); // Set the custom font
   textSize(30); // Setting text size
