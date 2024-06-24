@@ -1,193 +1,113 @@
-import java.util.Collections;
-ArrayList<TextWord> textWords;
-ArrayList<TextWord> backgroundWords;
-ArrayList<TextWord> shuffledTextWords;
+ArrayList<DynamicText> words = new ArrayList<DynamicText>();
 
 void setup() {
-  size(800, 750);
-  textWords = new ArrayList<>();
-  backgroundWords = new ArrayList<>();
-  shuffledTextWords = new ArrayList<>();
+  size(800, 600);
+  String poem = 
+    "In Alcatraz, where pain is in constant tread, Lies the tale of the Mob of the Dead. Sal, Billy, Finn and The Weasel trapped, their fate unkind, Seeking escape, whatever way to find. " +
+    "Within the prison, grim and cold, Electric chairs and secrets are bold. A plane to build, in parts it hides, Across the map, their fears will collide. " +
+    "First the key, from Warden’s grasp, Then plane parts scatter across the map, a very daunting task. Unlock the doors and secrets with afterlife, Through its ghostly paths, they will be reasons to fight. " +
+    "The Blundergat, a weapon that is a fearsome tool, And Hell’s Retriever, a tomahawk axe which need spirits to rule. Feed the Hounds with zombies slain, To wield the axe, in hellish bane. " +
+    "Fly to the Golden Gate Bridge with the built plane, a hellish flight, into the face of undead in the darkest of nights. Electric chairing back to Alcatraz, they’re sent once more, In a cycle thats endless, for their fates to implore. " +
+    "After three more plane flight filled with fuel, Steps to redemption requires volts, the four in pain, Must collect the logs after the codes in four, for the chance of the cycle to break or maintain. In Afterlife, their sins confess, To break the loop, or live in constant distress. " +
+    "A map of dread, where terrors spread, In Mob of the Dead, where hope is bled. Easter egg’s tale, a ghostly game, To break the cycle, or live in eternal pain.";
   
-  // Creating TextWord objects for each word
-  String[] words1 = {
-    "Now", "I", "done", "grew", "up", "'round", "some", "people", "livin'", "their", "life", "in", "bottles,",
-    "Granddaddy", "had", "the", "golden", "flask,", "Backstroke", "every", "day", "in", "Chicago,",
-    "Some", "people", "like", "the", "way", "it", "feels,",
-    "Some", "people", "wanna", "kill", "their", "sorrows,",
-    "Some", "people", "wanna", "fit", "in", "with", "the", "popular,", "that", "was", "my", "problem."
-  };
-  String[] words2 = {
-    "I", "was", "in", "the", "dark", "room,", "loud", "tunes,", "lookin'", "to", "make", "a", "vow", "soon,",
-    "That", "I'ma", "get", "fucked", "up,", "fillin'", "up", "my", "cup,", "I", "see", "the", "crowd", "mood",
-    "Changin'", "by", "the", "minute", "and", "the", "record", "on", "repeat,",
-    "Took", "a", "sip,", "then", "another", "sip,", "then", "somebody", "said", "to", "me,"
-  };
-  String[] words3 = {
-    "N****", "why", "you", "babysittin'", "only", "two", "or", "three", "shots?",
-    "I'ma", "show", "you", "how", "to", "turn", "it", "up", "a", "notch,",
-    "First", "you", "get", "a", "swimming", "pool", "full", "of", "liquor", "then", "you", "dive", "in", "it,",
-    "Pool", "full", "of", "liquor", "then", "you", "dive", "in", "it."
-  };
-  String[] words4 = {
-    "I", "wave", "a", "few", "bottles,", "then", "I", "watch", "'em", "all", "flock,",
-    "All", "the", "girls", "wanna", "play", "Baywatch,",
-    "I", "got", "a", "swimming", "pool", "full", "of", "liquor", "and", "they", "dive", "in", "it,",
-    "Po-pool", "full", "of", "liquor", "I'ma", "dive", "in", "it."
-  };
-  
-  float x = 50;
-  float y = 50;
-  float textAreaHeight = 60;
-  float textAreaTop = height - textAreaHeight;
-  float wordAreaTop = 0;
-  float wordAreaBottom = textAreaTop - 20;
+  String[] wordsArray = splitTokens(poem, " ");
 
-  for (String word : words1) {
-    TextWord tw = new TextWord(word, x, y);
-    textWords.add(tw);
-    backgroundWords.add(new TextWord(word, x, y, true)); // Add as background word
-    x += textWidth(word) + 5;
+  float x = 10;
+  float y = 70; // Adjusted initial y position for better readability
+  textSize(16); // Set initial text size
+  for (String word : wordsArray) {
+    words.add(new DynamicText(word, x, y));
+    x += textWidth(word + " ");
     if (x > width - 100) {
-      x = 50;
+      x = 10;
       y += 30;
     }
   }
- for (String word : words2) {
-    TextWord tw = new TextWord(word, x, y);
-    textWords.add(tw);
-    backgroundWords.add(new TextWord(word, x, y, true)); // Add as background word
-    x += textWidth(word) + 5;
-    if (x > width - 100) {
-      x = 50;
-      y += 30;
-    }
-  }
-  for (String word : words3) {
-    TextWord tw = new TextWord(word, x, y);
-    textWords.add(tw);
-    backgroundWords.add(new TextWord(word, x, y, true)); // Add as background word
-    x += textWidth(word) + 5;
-    if (x > width - 100) {
-      x = 50;
-      y += 30;
-    }
-  }
-for (String word : words4) {
-    TextWord tw = new TextWord(word, x, y);
-    textWords.add(tw);
-    backgroundWords.add(new TextWord(word, x, y, true)); // Add as background word
-    x += textWidth(word) + 5;
-    if (x > width - 100) {
-      x = 50;
-      y += 30;
-    }
-  }
-  // Randomize the locations of the non-background words
-  for (TextWord tw : textWords) {
-    if (!tw.background) {
-      float newX = random(50, width - 100);
-      float newY = random(wordAreaTop, wordAreaBottom);
-      tw.x = newX;
-      tw.y = newY;
-    }
-  }
-
-  // Do not shuffle background words
-  shuffledTextWords.addAll(textWords);
-  Collections.shuffle(shuffledTextWords.subList(0, textWords.size())); // Shuffle only non-background words
 }
 
-
 void draw() {
-  background(255);
-  for (TextWord bw : backgroundWords) {
-    bw.display();
+  background(0);
+  textSize(24);
+  fill(255);
+  text("BO2 (Black Ops 2) MOTD (Mob Of The Dead) Poem", 10, 40); // Title text
+
+  textSize(16);
+  for (DynamicText word : words) {
+    word.display();
   }
-  for (TextWord tw : shuffledTextWords) {
-    tw.display();
-  }
-  
-  // Display artist and song information at the bottom of the canvas
-  fill(0);
-  text("Artist: Kendrick Lamar", width/2, height - 40);
-  text("Song: Swimming Pools (Drank)", width/2, height - 20);
+
+  // Add instructional text at the bottom
+  textSize(14);
+  fill(200); // Slightly lighter color for instructional text
+  text("Drag and move the words around, to create your own poem that makes you proud. Good Luck", 125, height - 10);
 }
 
 void mousePressed() {
-  boolean wordPicked = false;
-  for (TextWord tw : shuffledTextWords) {
-    if (tw.contains(mouseX, mouseY) && !tw.background && !wordPicked) {
-      tw.dragging = true;
-      tw.offsetX = mouseX - tw.x;
-      tw.offsetY = mouseY - tw.y;
-      wordPicked = true;
-    } else {
-      tw.dragging = false; // Ensure other words are not dragged
-    }
-  }
-}
-void mouseReleased() {
-  for (TextWord tw : shuffledTextWords) {
-    if (tw.dragging) {
-      for (TextWord bw : backgroundWords) {
-        if (bw.contains(tw.x + textWidth(tw.word) / 2, tw.y + textDescent() / 2) && tw.word.equals(bw.word)) {
-          tw.x = bw.x;
-          tw.y = bw.y;
-          tw.dragging = false;
-          tw.fillColor = color(0, 255, 0); // Change color to green
-          tw.interactable = false; // Set to non-interactable
-        }
-      }
-      tw.dragging = false;
-    }
+  for (DynamicText word : words) {
+    word.checkIfPressed();
   }
 }
 
 void mouseDragged() {
-  for (TextWord tw : shuffledTextWords) {
-    if (tw.dragging && tw.interactable) {
-      tw.x = mouseX - tw.offsetX;
-      tw.y = mouseY - tw.offsetY;
-    }
+  for (DynamicText word : words) {
+    word.drag();
   }
 }
 
+void mouseReleased() {
+  for (DynamicText word : words) {
+    word.release();
+  }
+}
 
-class TextWord {
-  String word;
+class DynamicText {
+  String text;
   float x, y;
+  boolean isBeingDragged = false;
   float offsetX, offsetY;
-  boolean background;
-  color fillColor;
-  boolean interactable = true;
-  boolean dragging = false; // Added dragging field
-  
-  // Constructor for regular words
-  TextWord(String word, float x, float y) {
-    this.word = word;
+
+  DynamicText(String text, float x, float y) {
+    this.text = text;
     this.x = x;
     this.y = y;
-    this.background = false; // Regular words are not background words
-    this.fillColor = color(0); // Default fill color
   }
-  
-  // Constructor for background words
-  TextWord(String word, float x, float y, boolean background) {
-    this.word = word;
-    this.x = x;
-    this.y = y;
-    this.background = background;
-    this.fillColor = color(0, 50); // Default fill color for background words
-  }
-  
+
   void display() {
-    fill(fillColor);
-    text(word, x, y);
+    if (isBeingDragged) {
+      fill(0, 155, 255); // Highlight the word being dragged
+    } else if (isHovered()) {
+      fill(255, 0, 0); // Highlight the word being hovered
+    } else {
+      fill(255, 165, 0); // Default color
+    }
+    text(text, x, y);
   }
-  
-  boolean contains(float px, float py) {
-    float tw = textWidth(word);
-    return px > x && px < x + tw && py > y - textAscent() && py < y + textDescent();
+
+  void checkIfPressed() {
+    float textW = textWidth(text);
+    float textH = textAscent() + textDescent(); // Accurate text height
+    if (mouseX > x && mouseX < x + textW && mouseY > y - textH && mouseY < y) {
+      isBeingDragged = true;
+      offsetX = mouseX - x;
+      offsetY = mouseY - y;
+    }
   }
-} 
+
+  void drag() {
+    if (isBeingDragged) {
+      x = constrain(mouseX - offsetX, 0, width - textWidth(text));
+      y = constrain(mouseY - offsetY, textAscent(), height - textDescent());
+    }
+  }
+
+  void release() {
+    isBeingDragged = false;
+  }
+
+  boolean isHovered() {
+    float textW = textWidth(text);
+    float textH = textAscent() + textDescent();
+    return (mouseX > x && mouseX < x + textW && mouseY > y - textH && mouseY < y);
+  }
+}
